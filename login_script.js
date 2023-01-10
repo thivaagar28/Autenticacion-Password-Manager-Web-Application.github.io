@@ -28,6 +28,7 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 document.getElementById("login").addEventListener("click", (e)=>{
+    e.preventDefault();
     var user_name = document.getElementById("username").value;
     var password = document.getElementById("password").value;
     const target = ref(database, 'Users/' + user_name);
@@ -36,7 +37,8 @@ document.getElementById("login").addEventListener("click", (e)=>{
         console.log(data);
         if (data) {
             if (data.password == password) {
-                alert('correct');
+                localStorage.setItem("user_name", user_name);
+                window.location.href = "./simple_password_manager.html";
             }
             else{
                 alert('password does not match');
@@ -47,3 +49,9 @@ document.getElementById("login").addEventListener("click", (e)=>{
     })
 })
 //*/
+const queryString = window.location.search;
+console.log(queryString);
+const urlParams = new URLSearchParams(queryString);
+
+const domain = urlParams.get('domain');
+const password = urlParams.get('password');
