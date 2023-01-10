@@ -1,3 +1,14 @@
+document.addEventListener("DOMContentLoaded", ()=>{
+    const queryString = window.location.search;
+    console.log(queryString);
+    const urlParams = new URLSearchParams(queryString);
+
+    const domain = urlParams.get('domain');
+    const pd = urlParams.get('password');
+    console.log(pd);
+    console.log(domain);
+})
+
 /*
 document.getElementById("login").addEventListener("click", () =>{
     window.location.href='extension.html';
@@ -49,9 +60,5 @@ document.getElementById("login").addEventListener("click", (e)=>{
     })
 })
 //*/
-const queryString = window.location.search;
-console.log(queryString);
-const urlParams = new URLSearchParams(queryString);
 
-const domain = urlParams.get('domain');
-const password = urlParams.get('password');
+
