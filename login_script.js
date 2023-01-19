@@ -1,10 +1,13 @@
+let pd, domain, user_name, master_password;
 document.addEventListener("DOMContentLoaded", ()=>{
     const queryString = window.location.search;
     console.log(queryString);
     const urlParams = new URLSearchParams(queryString);
 
-    const domain = urlParams.get('domain');
-    const pd = urlParams.get('password');
+    //domain = urlParams.get('domain');
+    domain = "www.linkedin.com";
+    //pd = urlParams.get('password');
+    pd = "";
     console.log(pd);
     console.log(domain);
 })
@@ -17,7 +20,7 @@ document.getElementById("login").addEventListener("click", () =>{
 // Import the functions you need from the SDKs you need
 ///*
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
-import { getDatabase, ref, set, onValue, get } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+import { getDatabase, ref, set, onValue, get, push } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -40,16 +43,18 @@ const database = getDatabase(app);
 
 document.getElementById("login").addEventListener("click", (e)=>{
     e.preventDefault();
-    var user_name = document.getElementById("username").value;
-    var password = document.getElementById("password").value;
+    user_name = document.getElementById("username").value;
+    master_password = document.getElementById("master_password").value;
     const target = ref(database, 'Users/' + user_name);
     onValue(target, (snapshot) => {
         const data = snapshot.val();
-        console.log(data);
+        //console.log(data);
         if (data) {
-            if (data.password == password) {
-                localStorage.setItem("user_name", user_name);
-                window.location.href = "./simple_password_manager.html";
+            if (data.Masterpassword == master_password) {
+                alert("Successfull Login");
+                document.getElementById("pl_dm").value = domain;
+                document.getElementById("password").value = pd;
+                password_display();
             }
             else{
                 alert('password does not match');
@@ -61,4 +66,34 @@ document.getElementById("login").addEventListener("click", (e)=>{
 })
 //*/
 
+function password_display(){
+    const target = ref(database, 'Users/' + user_name + '/' + "Platforms/");
+    let uid;
+    onValue(target, (snapshot)=>{
+        const data = snapshot.val();
+        const keys = Object.keys(data);
+        console.log(keys);
+        for(var i=0; i<keys.length; i++){
+            const k = keys[i];
+            if(data[k].platform == domain){
+                //console.log("dapat");
+                document.getElementById("identifier").value = data[k].id;
+                document.getElementById("password").value = data[k].password;
+                break;
+            }else{
+                console.log("tak dapat")
+            }
+        }
+        //
+    })
+}
 
+function save_log_cred(){
+    const target = ref(database, 'Users/' + user_name + '/' + "Platforms/");
+    const newPostRef = push(target);
+    set(newPostRef, {   //posting data with unique id
+        platform: domain,
+        id: "pablo1234@gmail.com",
+        password: pd
+    });
+}
