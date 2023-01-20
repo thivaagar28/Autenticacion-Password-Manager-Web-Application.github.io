@@ -4,10 +4,10 @@ document.addEventListener("DOMContentLoaded", ()=>{
     console.log(queryString);
     const urlParams = new URLSearchParams(queryString);
 
-    //domain = urlParams.get('domain');
-    domain = "www.youtube.com";
-    //pd = urlParams.get('password');
-    pd = "Hkz0!O+;2#HF9";
+    domain = urlParams.get('domain');
+    //domain = "www.youtube.com";
+    pd = urlParams.get('password');
+    //pd = "Hkz0!O+;2#HF9";
     console.log(pd);
     console.log(domain);
 })
