@@ -4,19 +4,14 @@ document.addEventListener("DOMContentLoaded", ()=>{
     console.log(queryString);
     const urlParams = new URLSearchParams(queryString);
 
-    domain = urlParams.get('domain');
-    //domain = "www.linkedin.com";
-    pd = urlParams.get('password');
-    //pd = "";
+    //domain = urlParams.get('domain');
+    domain = "www.youtube.com";
+    //pd = urlParams.get('password');
+    pd = "Hkz0!O+;2#HF9";
     console.log(pd);
     console.log(domain);
 })
 
-/*
-document.getElementById("login").addEventListener("click", () =>{
-    window.location.href='extension.html';
-});
-*/
 // Import the functions you need from the SDKs you need
 ///*
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
@@ -42,6 +37,7 @@ const app = initializeApp(firebaseConfig);
 const database = getDatabase(app);
 
 document.getElementById("login").addEventListener("click", (e)=>{
+    console.log("Login clicked");
     e.preventDefault();
     user_name = document.getElementById("username").value;
     master_password = document.getElementById("master_password").value;
@@ -52,6 +48,8 @@ document.getElementById("login").addEventListener("click", (e)=>{
         if (data) {
             if (data.Masterpassword == master_password) {
                 alert("Successfull Login");
+                document.getElementById("login_feature").style.display = "none";
+                document.getElementById("password_manager").style.display = "block";
                 document.getElementById("pl_dm").value = domain;
                 document.getElementById("password").value = pd;
                 password_display();
@@ -68,32 +66,57 @@ document.getElementById("login").addEventListener("click", (e)=>{
 
 function password_display(){
     const target = ref(database, 'Users/' + user_name + '/' + "Platforms/");
-    let uid;
+    //document.getElementById('password').innerHTML =
+    let uid, data;
+    let isfound = false;
     onValue(target, (snapshot)=>{
-        const data = snapshot.val();
+        data = snapshot.val();
         const keys = Object.keys(data);
         console.log(keys);
         for(var i=0; i<keys.length; i++){
             const k = keys[i];
             if(data[k].platform == domain){
-                //console.log("dapat");
-                document.getElementById("identifier").value = data[k].id;
-                document.getElementById("password").value = data[k].password;
+                isfound = true;
+                uid = k;
                 break;
-            }else{
-                console.log("tak dapat")
             }
         }
-        //
-    })
+    });
+    if(isfound==true){
+        console.log("platform found");
+        document.getElementById("identifier").value = data[uid].id;
+        document.getElementById("password").value = data[uid].password;
+        document.getElementById("save").style.display = "none";
+    }else{
+        console.log("platform not found");
+        no_platform();
+    }
 }
 
-function save_log_cred(){
+function save_log_cred(e){
+    e.preventDefault();
     const target = ref(database, 'Users/' + user_name + '/' + "Platforms/");
     const newPostRef = push(target);
     set(newPostRef, {   //posting data with unique id
         platform: domain,
-        id: "pablo1234@gmail.com",
+        id: document.getElementById("identifier").value,
         password: pd
+    });
+}
+
+function no_platform(){
+    document.getElementById("password").value = pd;
+    document.getElementById("log_cred").innerHTML ="Login Credential Not Found";
+    document.getElementById("save").addEventListener("click", (e)=>{
+        e.preventDefault();
+        const target = ref(database, 'Users/' + user_name + '/' + "Platforms/");
+        const newPostRef = push(target);
+        set(newPostRef, {   //posting data with unique id
+            platform: domain,
+            id: document.getElementById("identifier").value,
+            password: pd
+        });
+        alert("Password Saved");
+        //password_display();
     });
 }
