@@ -5,61 +5,84 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Extension Login Page</title>
+    <!--External stylesheet-->
     <link rel="stylesheet" href="style.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
 <body>
+    <!--Backgroud image-->
     <div id="bg"></div>
+    <!--Form to contain all the inputs and display-->
     <form>
+        <!--Login Option-->
         <div class="login_feature" id="login_feature">
+            <!--Username Input-->
             <div class="form-field">
                 <div class="container">
+                    <!--user icon-->
                     <div class="image_holder"><img src="img/user-icon.png" alt=""></div>
                     <input id="username" type="text" placeholder="Username" class="username" required/>
                 </div>
             </div>
+            <!--Master Password Input-->
             <div class="form-field">
                 <div class="container">
+                    <!--lock icon-->
                     <div class="image_holder"><img src="img/lock2-icon.png" alt=""></div>
                     <input id="master_password" type="password" placeholder="Master Password" required/>
+                    <!--password reveal icon/button-->
                     <div class="image_holder"><img src="img/eye-icon.png" alt="" id="toggle_password" data-hover="Toggle Visibility"></div>
                 </div>
             </div>
         </div>
+        <!--Password Manager Option-->
         <div class="password_manager" id="password_manager">
+            <!--Identifier Header-->
             <div class="form-field">
                 <div class="header_container">
                     <h3 class="log_cred" id="log_cred">Login Credentials Found</h3>
                 </div>
             </div>
+            <!--Domain/Platform Input-->
             <div class="form-field">
                 <div class="container">
+                    <!--platform/domain icon-->
                     <div class="image_holder"><img src="img/pin-icon.png" alt=""></div>
                     <input type="text" placeholder="Platform/Domain" id="pl_dm" readonly>
                 </div>
             </div>
+            <!--Login Credential Input-->
             <div class="form-field">
                 <div class="container">
+                    <!--Identifier icon-->
                     <div class="image_holder"><img src="img/magnifier-icon.png" alt=""></div>
                     <input type="text" placeholder="Fill in Login Credential" id="identifier" required>
                 </div>
             </div>
+            <!--Password Input-->
             <div class="form-field">
                 <div class="container">
+                    <!--copy to clipboard button-->
                     <button class="image_holder_special" data-hover="Click to Copy to Clipboard" id="ctc">
+                        <!--lock icon-->
                         <img src="img/lock2-icon.png" alt="">
                     </button>
                     <input type="password" placeholder="password" id="password">
+                    <!--password reveal icon/button-->
                     <div class="image_holder"><img src="img/eye-icon.png" alt="" id="toggle_password2"></div>
                 </div>
             </div>
         </div>
-            <div class="button_container">
-                <button type="button" id="exit" class="btn">Exit</button>
-                <button id = "login" class="btn" type="submit">Log in</button>
-                <button type="button" id="save" class="btn">Save</button>
-            </div>
+        <!--Button Container-->
+        <div class="button_container">
+            <!--Exit Page Button-->
+            <button type="button" id="exit" class="btn">Exit</button>
+            <!--Login button-->
+            <button id = "login" class="btn" type="submit">Log in</button>
+            <!--Save login credential button-->
+            <button type="button" id="save" class="btn">Save</button>
+        </div>
     </form>
 </body>
+<!--Import JavaScript-->
 <script type="module" src="login_script.js" ></script>
 </html>
