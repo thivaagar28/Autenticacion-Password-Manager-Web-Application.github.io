@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css?family=Lato:400,700");
+* {
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+  
+}
 #bg {
   background-image: url('img/background.jpg');
   position: fixed;
@@ -24,6 +30,7 @@ form {
   width: 350px;
   position: relative;
 }
+/*
 form .form-field::before {
   font-size: 20px;
   position: absolute;
@@ -34,6 +41,7 @@ form .form-field::before {
   display: block;
   background-size: cover;
   background-repeat: no-repeat;
+  border: 2px solid red;
 }
 form .form-field:nth-child(1)::before {
   background-image: url(img/user-icon.png);
@@ -42,10 +50,16 @@ form .form-field:nth-child(1)::before {
   top: 15px;
 }
 form .form-field:nth-child(2)::before {
+  background-color: aqua;
   background-image: url(img/lock-icon.png);
   width: 16px;
   height: 16px;
 }
+form .form-field:nth-child(4)::before{
+  background-color: red;
+  background-image: url(img/magnifier-icon.png);
+}
+*/
 form .form-field {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -59,19 +73,86 @@ form .form-field {
   margin-bottom: 1rem;
   position: relative;
 }
-form input {
+form .container {
   font-family: inherit;
   width: 100%;
   outline: none;
-  background-color: #fff;
+  background-color: rgb(255, 255, 255);
   border-radius: 4px;
   border: none;
-  display: block;
-  padding: 0.9rem 0.7rem;
+  display: flex;
+  position: relative;
+  padding: 0.7rem 0.7rem;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  justify-content: flex-start;
+}
+form .header_container{
+  font-family: inherit;
+  color: azure;
+  width: 100%;
+  outline: none;
+  background-color:rgba(178, 163, 163, 0.68);
+  border-radius: 4px;
+  border: none;
+  display: flex;
+  position: relative;
+  padding: 0.7rem 0.7rem;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
+  justify-content: center;
+}
+form .button_container {
+  display: flex;
+  flex-direction: row;
+}
+
+.container input{
+  font-family: inherit;
   font-size: 17px;
+  border : none;
+  outline: none;
+  width: 85%;
+  text-indent: 10px;
   color: #4A4A4A;
-  text-indent: 40px;
+}
+.container .image_holder, .container .image_holder_special{
+  width: 7%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.container .image_holder img, .container .image_holder button, .container .image_holder_special img, .container .image_holder_special button{
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+.container .image_holder_special, #toggle_password, #toggle_password2{
+  cursor: pointer;
+  position: relative;
+  background-color: transparent;
+}
+.container .image_holder_special:before{
+  content: attr(data-hover);
+  visibility: hidden;
+  opacity: 0;
+  width: 140px;
+  background-color: black;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 5px 0;
+  transition: opacity 1s ease-in-out;
+
+  position: absolute;
+  z-index: 1;
+  left: 0;
+  top: 110%;
+}
+.container .image_holder_special:hover:before{
+  opacity: 1;
+  visibility: visible;
 }
 form .btn {
   outline: none;
@@ -86,7 +167,11 @@ form .btn {
   border-radius: 4px;
   box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.16);
   font-size: 17px;
+  width: 40%;
 }
 .password_manager{
+  display: none;
+}
+#save{
   display: none;
 }

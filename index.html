@@ -6,34 +6,59 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Extension Login Page</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.0/css/all.min.css">
 </head>
 <body>
     <div id="bg"></div>
     <form>
         <div class="login_feature" id="login_feature">
             <div class="form-field">
-                <input id="username" type="text" placeholder="Username" required/>
+                <div class="container">
+                    <div class="image_holder"><img src="img/user-icon.png" alt=""></div>
+                    <input id="username" type="text" placeholder="Username" class="username" required/>
+                </div>
             </div>
             <div class="form-field">
-                <input id="master_password" type="password" placeholder="Master Password" required/>
-            </div>
-            <div class="form-field">
-                <button id = "login" class="btn" type="button">Log in</button>
+                <div class="container">
+                    <div class="image_holder"><img src="img/lock2-icon.png" alt=""></div>
+                    <input id="master_password" type="password" placeholder="Master Password" required/>
+                    <div class="image_holder"><img src="img/eye-icon.png" alt="" id="toggle_password" data-hover="Toggle Visibility"></div>
+                </div>
             </div>
         </div>
         <div class="password_manager" id="password_manager">
-            <h3 class="log_cred" id="log_cred">Login Credentials Found</h3>
-            <div>
-                <input type="text" placeholder="Platform/Domain" id="pl_dm">
+            <div class="form-field">
+                <div class="header_container">
+                    <h3 class="log_cred" id="log_cred">Login Credentials Found</h3>
+                </div>
             </div>
-            <div>
-                <input type="text" placeholder="Login Credential" id="identifier" required>
+            <div class="form-field">
+                <div class="container">
+                    <div class="image_holder"><img src="img/pin-icon.png" alt=""></div>
+                    <input type="text" placeholder="Platform/Domain" id="pl_dm" readonly>
+                </div>
             </div>
-            <div>
-                <input type="text" placeholder="password" id="password">
+            <div class="form-field">
+                <div class="container">
+                    <div class="image_holder"><img src="img/magnifier-icon.png" alt=""></div>
+                    <input type="text" placeholder="Fill in Login Credential" id="identifier" required>
+                </div>
             </div>
-            <button type="button" id="save" class="btn">Save</button>
+            <div class="form-field">
+                <div class="container">
+                    <button class="image_holder_special" data-hover="Click to Copy to Clipboard" id="ctc">
+                        <img src="img/lock2-icon.png" alt="">
+                    </button>
+                    <input type="password" placeholder="password" id="password">
+                    <div class="image_holder"><img src="img/eye-icon.png" alt="" id="toggle_password2"></div>
+                </div>
+            </div>
         </div>
+            <div class="button_container">
+                <button type="button" id="exit" class="btn">Exit</button>
+                <button id = "login" class="btn" type="submit">Log in</button>
+                <button type="button" id="save" class="btn">Save</button>
+            </div>
     </form>
 </body>
 <script type="module" src="login_script.js" ></script>
